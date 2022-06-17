@@ -10,8 +10,7 @@ import Home from './panels/home.js';
 import Settings from './panels/settings.js';
 
 
-let win = nw.Window.get();
-let Dev = (window.navigator.plugins.namedItem('Native Client') !== null);
+let win = Window;
 
 class Launcher {
     async init() {
@@ -29,7 +28,7 @@ class Launcher {
         let logs = document.querySelector(".log-panel");
         let block = false;
         document.addEventListener("keydown", (e) => {
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 73 || e.keyCode == 123 && !Dev) {
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73 || e.keyCode == 123) {
                 if (block === true) {
                     logs.style.display = "none";
                     block = false;

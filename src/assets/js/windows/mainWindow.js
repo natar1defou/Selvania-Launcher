@@ -2,6 +2,7 @@
 const electron = require("electron");
 const path = require("path");
 const os = require("os");
+const pkg = require("../../../../package.json");
 let updateWindow = undefined;
 
 function getWindow() {
@@ -17,9 +18,12 @@ function destroyWindow() {
 function createWindow() {
     destroyWindow();
     updateWindow = new electron.BrowserWindow({
-        width: 400,
-        height: 500,
-        resizable: false,
+        title: pkg.preductname,
+        width: 1280,
+        height: 720,
+        minWidth: 980,
+        minHeight: 552,
+        resizable: true,
         transparent: os.platform() === 'win32',
         frame: os.platform() !== 'win32',
         show: false,

@@ -1,8 +1,8 @@
 'use strict';
 const pkg = require('../package.json');
+const { ipcRenderer } = require('electron');
 import { config } from './utils.js';
 
-const MainWindow = require('./assets/js/windows/mainWindow.js');
 
 class Splash {
     constructor() {
@@ -46,12 +46,15 @@ class Splash {
         })
     }
 
-    async checkUpdate() {}
+    async checkUpdate() {
+
+    }
 
 
     startLauncher() {
         this.setStatus(`Démarrage du launcher`);
-        MainWindow.createWindow()
+        ipcRenderer.send('main-window-open');
+        ipcRenderer.send('update-window-close');
     }
 
     shutdown(text) {
