@@ -2,7 +2,6 @@
 const electron = require("electron");
 const path = require("path");
 const os = require("os");
-
 let updateWindow = undefined;
 
 function getWindow() {
@@ -25,11 +24,10 @@ function createWindow() {
         frame: os.platform() !== 'win32',
         show: false,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: false,
+            nodeIntegration: true
         },
     });
-    // Hide the default menu
     electron.Menu.setApplicationMenu(null);
     updateWindow.setMenuBarVisibility(false);
     updateWindow.loadFile(path.join(electron.app.getAppPath(), 'src', 'index.html'));

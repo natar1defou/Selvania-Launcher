@@ -40,20 +40,18 @@ class Splash {
         config.GetConfig().then(res => {
             if (res.maintenance) return this.shutdown(res.maintenance_message);
             else this.startLauncher();
-        }).catch(err => {
-            console.log("impossible de charger le config.json");
-            console.log(err);
+        }).catch(e => {
+            console.error(e);
             // return this.shutdown("Aucune connexion internet détectée,<br>veuillez réessayer ultérieurement.");
         })
     }
 
-    async checkUpdate() {
-    }
+    async checkUpdate() {}
 
 
     startLauncher() {
         this.setStatus(`Démarrage du launcher`);
-        MainWindow.createWindow()  
+        MainWindow.createWindow()
     }
 
     shutdown(text) {
@@ -82,5 +80,5 @@ class Splash {
 new Splash();
 
 function sleep(ms) {
-    return new Promise((r) => { setTimeout(r, ms) });
+    return new Promise(r => setTimeout(r, ms));
 }

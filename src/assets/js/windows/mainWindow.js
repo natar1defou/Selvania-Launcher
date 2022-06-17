@@ -1,45 +1,41 @@
 "use strict";
-const { Menu, app, BrowserWindow } = require("electron");
+const electron = require("electron");
 const path = require("path");
 const os = require("os");
-let mainWindow = null;
+let updateWindow = undefined;
 
 function getWindow() {
-    return mainWindow;
+    return updateWindow;
 }
 
 function destroyWindow() {
-    if (!mainWindow) return;
-    mainWindow.close();
-    mainWindow = null;
+    if (!updateWindow) return;
+    updateWindow.close();
+    updateWindow = undefined;
 }
 
 function createWindow() {
     destroyWindow();
-    return new Promise(resolve => {
-        mainWindow = new BrowserWindow({
-            width: 1280,
-            height: 720,
-            minWidth: 1280,
-            minHeight: 720,
-            resizable: true,
-            transparent: os.platform() === 'win32',
-            frame: os.platform() !== 'win32',
-            show: false,
-            webPreferences: {
-                nodeIntegration: true,
-                contextIsolation: false
-            },
-        });
-        // Hide the default menu
-        Menu.setApplicationMenu(null);
-        mainWindow.setMenuBarVisibility(false);
-        mainWindow.loadFile(path.join(app.getAppPath(), 'src', 'launcher.html'));
-
-        mainWindow.once('ready-to-show', () => {
-            if (mainWindow) mainWindow.show();
-            resolve();
-        });
+    updateWindow = new electron.BrowserWindow({
+        width: 400,
+        height: 500,
+        resizable: false,
+        transparent: os.platform() === 'win32',
+        frame: os.platform() !== 'win32',
+        show: false,
+        webPreferences: {
+            contextIsolation: false,
+            nodeIntegration: true
+        },
+    });
+    electron.Menu.setApplicationMenu(null);
+    updateWindow.setMenuBarVisibility(false);
+    updateWindow.loadFile(path.join(electron.app.getAppPath(), 'src', 'launcher.html'));
+    updateWindow.webContents.openDevTools()
+    updateWindow.once('ready-to-show', () => {
+        if (updateWindow) {
+            updateWindow.show();
+        }
     });
 }
 
