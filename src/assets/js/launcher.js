@@ -3,14 +3,12 @@
 // libs 
 const fs = require('fs');
 const { Microsoft, Mojang } = require('minecraft-java-core');
+const { ipcRenderer } = require('electron');
 
 import { config, logger, changePanel, database, addAccount, accountSelect } from './utils.js';
 import Login from './panels/login.js';
 import Home from './panels/home.js';
 import Settings from './panels/settings.js';
-
-
-let win = Window;
 
 class Launcher {
     async init() {
@@ -47,21 +45,21 @@ class Launcher {
         document.querySelector(".dragbar").classList.toggle("hide")
 
         document.querySelector("#minimize").addEventListener("click", () => {
-            win.minimize()
+            ipcRenderer.send("main-window-minimize");
         });
 
         let maximized = false;
         let maximize = document.querySelector("#maximize")
         maximize.addEventListener("click", () => {
-            if (maximized) win.unmaximize()
-            else win.maximize()
+            if (maximized) ipcRenderer.send("main-window-maximize")
+            else ipcRenderer.send("main-window-maximize");
             maximized = !maximized
             maximize.classList.toggle("icon-maximize")
             maximize.classList.toggle("icon-restore-down")
         });
 
         document.querySelector("#close").addEventListener("click", () => {
-            win.close();
+            ipcRenderer.send("main-window-close");
         })
     }
 

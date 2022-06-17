@@ -5,7 +5,6 @@ import { logger, database, changePanel } from '../utils.js';
 const { Launch, Status } = require('minecraft-java-core');
 const launch = new Launch();
 const pkg = require('../package.json');
-const win = Window;
 
 const dataDirectory = process.env.APPDATA || (process.platform == 'darwin' ? `${process.env.HOME}/Library/Application Support` : process.env.HOME)
 
@@ -133,7 +132,6 @@ class Home {
             launch.on('progress', (DL, totDL) => {
                 progressBar.style.display = "block"
                 document.querySelector(".text-download").innerHTML = `Téléchargement ${((DL / totDL) * 100).toFixed(0)}%`
-                // win.setProgressBar(DL / totDL);
                 progressBar.value = DL;
                 progressBar.max = totDL;
             })
@@ -152,18 +150,14 @@ class Home {
 
             launch.on('data', (e) => {
                 new logger('Minecraft', '#36b030', logcontent);
-                if(launcherSettings.launcher.close === 'close-launcher') win.hide();
+                if(launcherSettings.launcher.close === 'close-launcher')
                 progressBar.style.display = "none"
-                // win.setProgressBar(0);
                 info.innerHTML = `Demarrage en cours...`
                 console.log(e);
             })
 
             launch.on('close', () => {
                 if(launcherSettings.launcher.close === 'close-launcher') {
-                    win.show();
-                    win.focus();
-                    win.setShowInTaskbar(true);
                 }
                 progressBar.style.display = "none"
                 info.style.display = "none"

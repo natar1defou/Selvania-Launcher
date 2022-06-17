@@ -1,4 +1,5 @@
 const { app, ipcMain } = require('electron');
+const { Microsoft } = require('minecraft-java-core');
 const UpdateWindow = require("./assets/js/windows/updateWindow.js");
 const MainWindow = require("./assets/js/windows/mainWindow.js");
 
@@ -25,7 +26,21 @@ ipcMain.on('main-window-close', () => {
     MainWindow.destroyWindow();
 })
 
+ipcMain.on('main-window-minimize', () => {
+    MainWindow.getWindow().minimize();
+})
 
+ipcMain.on('main-window-maximize', () => {
+    if (MainWindow.getWindow().isMaximized()) {
+        MainWindow.getWindow().unmaximize();
+    } else {
+        MainWindow.getWindow().maximize();
+    }
+})
+
+ipcMain.on('Microsoft-window', async (event, client_id) => {
+    return await new Microsoft(client_id).getAuth();
+})
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
