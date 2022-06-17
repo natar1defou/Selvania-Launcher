@@ -1,14 +1,8 @@
 'use strict';
-const AutoUpdater = require("nw-autoupdater-luuxis");
-const pkg = nw.global.manifest.__nwjs_manifest;
+const pkg = require('../package.json');
 import { config } from './utils.js';
-const updater = new AutoUpdater(pkg, { strategy: "ScriptSwap" });
 
-let url = pkg.user ? `${pkg.url}/${pkg.user}` : pkg.url
-const manifestUrl = url + "/launcher/version.json";
-
-let win = nw.Window.get();
-let Dev = (window.navigator.plugins.namedItem('Native Client') !== null);
+const MainWindow = require('./assets/js/windows/mainWindow.js');
 
 class Splash {
     constructor() {
@@ -23,7 +17,8 @@ class Splash {
     async startAnimation() {
         let splashes = [
             { "message": "Je... vie...", "author": "Luuxis" },
-            { "message": "Salut je suis du code.", "author": "Luuxis" }
+            { "message": "Salut je suis du code.", "author": "Luuxis" },
+            { "message": "Linux n' ai pas un os, mais un kernel.", "author": "Luuxis" }
         ];
         let splash = splashes[Math.floor(Math.random() * splashes.length)];
         this.splashMessage.textContent = splash.message;
@@ -42,55 +37,23 @@ class Splash {
     }
 
     async maintenanceCheck() {
-        nw.App.clearCache();
-        if (Dev) return this.startLauncher();
         config.GetConfig().then(res => {
             if (res.maintenance) return this.shutdown(res.maintenance_message);
-            else this.checkUpdate();
+            else this.startLauncher();
         }).catch(err => {
             console.log("impossible de charger le config.json");
             console.log(err);
-            return this.shutdown("Aucune connexion internet détectée,<br>veuillez réessayer ultérieurement.");
+            // return this.shutdown("Aucune connexion internet détectée,<br>veuillez réessayer ultérieurement.");
         })
     }
 
     async checkUpdate() {
-        const manifest = await fetch(manifestUrl).then(res => res.json());
-        const update = await updater.checkNewVersion(manifest);
-        if (!update) return this.startLauncher();
-
-        updater.on("download", (dlSize, totSize) => {
-            this.setProgress(dlSize, totSize);
-        });
-        updater.on("install", (dlSize, totSize) => {
-            this.setProgress(dlSize, totSize);
-        });
-
-        this.toggleProgress();
-        this.setStatus(`Téléchargement de la mise à jour`);
-        const file = await updater.download(manifest);
-        this.setStatus(`Décompression de la mise à jour`);
-        await updater.unpack(file);
-        this.toggleProgress();
-        this.setStatus(`Redémarrage`);
-        await updater.restartToSwap();
     }
 
 
     startLauncher() {
         this.setStatus(`Démarrage du launcher`);
-        nw.Window.open('./src/launcher.html', {
-            "title": pkg.productName,
-            "width": 1280,
-            "height": 720,
-            "min_width": 980,
-            "min_height": 552,
-            "frame": (process.platform == "win32") ? false : true,
-            "position": "center",
-            "icon": "src/assets/images/icon.png"
-        }, () => {
-            win.close();
-        });
+        MainWindow.createWindow()  
     }
 
     shutdown(text) {
@@ -98,7 +61,7 @@ class Splash {
         let i = 4;
         setInterval(() => {
             this.setStatus(`${text}<br>Arrêt dans ${i--}s`);
-            if (i < 0) win.close();
+            if (i < 0) window.close();
         }, 1000);
     }
 
