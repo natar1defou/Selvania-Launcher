@@ -3,7 +3,6 @@ const pkg = require('../package.json');
 const { ipcRenderer } = require('electron');
 import { config } from './utils.js';
 
-
 class Splash {
     constructor() {
         this.splash = document.querySelector(".splash");
@@ -42,7 +41,7 @@ class Splash {
             else this.startLauncher();
         }).catch(e => {
             console.error(e);
-            // return this.shutdown("Aucune connexion internet détectée,<br>veuillez réessayer ultérieurement.");
+            return this.shutdown("Aucune connexion internet détectée,<br>veuillez réessayer ultérieurement.");
         })
     }
 
@@ -62,7 +61,7 @@ class Splash {
         let i = 4;
         setInterval(() => {
             this.setStatus(`${text}<br>Arrêt dans ${i--}s`);
-            if (i < 0) window.close();
+            if (i < 0) ipcRenderer.send('update-window-close');
         }, 1000);
     }
 

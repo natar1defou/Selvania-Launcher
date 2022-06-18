@@ -14,21 +14,12 @@ if (!gotTheLock) {
     });
 }
 
-ipcMain.on('update-window-close', () => {
-    UpdateWindow.destroyWindow();
-})
-
-ipcMain.on('main-window-open', () => {
-    MainWindow.createWindow();
-})
-
-ipcMain.on('main-window-close', () => {
-    MainWindow.destroyWindow();
-})
-
-ipcMain.on('main-window-minimize', () => {
-    MainWindow.getWindow().minimize();
-})
+ipcMain.on('update-window-close', () => UpdateWindow.destroyWindow())
+ipcMain.on('update-window-dev-tools', () => UpdateWindow.getWindow().webContents.openDevTools())
+ipcMain.on('main-window-open', () => MainWindow.createWindow())
+ipcMain.on('main-window-dev-tools', () => MainWindow.getWindow().webContents.openDevTools())
+ipcMain.on('main-window-close', () => MainWindow.destroyWindow())
+ipcMain.on('main-window-minimize', () => MainWindow.getWindow().minimize())
 
 ipcMain.on('main-window-maximize', () => {
     if (MainWindow.getWindow().isMaximized()) {
@@ -38,7 +29,10 @@ ipcMain.on('main-window-maximize', () => {
     }
 })
 
-ipcMain.on('Microsoft-window', async (event, client_id) => {
+ipcMain.on('main-window-hide', () => MainWindow.getWindow().hide())
+ipcMain.on('main-window-show', () => MainWindow.getWindow().show())
+
+ipcMain.handle('Microsoft-window', async(event, client_id) => {
     return await new Microsoft(client_id).getAuth();
 })
 

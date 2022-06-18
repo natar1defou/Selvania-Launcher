@@ -10,6 +10,8 @@ import Login from './panels/login.js';
 import Home from './panels/home.js';
 import Settings from './panels/settings.js';
 
+let dev = (process.env.NODE_ENV == 'dev');
+
 class Launcher {
     async init() {
         this.initLog();
@@ -26,7 +28,7 @@ class Launcher {
         let logs = document.querySelector(".log-panel");
         let block = false;
         document.addEventListener("keydown", (e) => {
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 73 || e.keyCode == 123) {
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73 || e.keyCode == 123 && !dev) {
                 if (block === true) {
                     logs.style.display = "none";
                     block = false;
@@ -34,6 +36,8 @@ class Launcher {
                     logs.style.display = "block";
                     block = true;
                 }
+            } else if (e.keyCode == 122) {
+                ipcRenderer.send("main-window-dev-tools");
             }
         })
         new logger('Launcher', '#7289da', document.querySelector(".log-content"))
@@ -69,7 +73,7 @@ class Launcher {
             console.log(`Initializing ${panel.name} Panel...`);
             let div = document.createElement("div");
             div.classList.add("panel", panel.id)
-            div.innerHTML = fs.readFileSync(`src/panels/${panel.id}.html`, "utf8");
+            div.innerHTML = fs.readFileSync(`${__dirname}/panels/${panel.id}.html`, "utf8");
             panelsElem.appendChild(div);
             new panel().init(this.config, this.news);
         }

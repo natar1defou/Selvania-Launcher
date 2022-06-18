@@ -24,6 +24,7 @@ function createWindow() {
         minWidth: 980,
         minHeight: 552,
         resizable: true,
+        icon: `./src/assets/images/icon.${os.platform() === "win32" ? "ico" : "png"}`,
         transparent: os.platform() === 'win32',
         frame: os.platform() !== 'win32',
         show: false,
@@ -35,7 +36,6 @@ function createWindow() {
     electron.Menu.setApplicationMenu(null);
     updateWindow.setMenuBarVisibility(false);
     updateWindow.loadFile(path.join(electron.app.getAppPath(), 'src', 'launcher.html'));
-    updateWindow.webContents.openDevTools()
     updateWindow.once('ready-to-show', () => {
         if (updateWindow) {
             updateWindow.show();

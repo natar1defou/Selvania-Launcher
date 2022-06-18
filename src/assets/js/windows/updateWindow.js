@@ -21,8 +21,9 @@ function createWindow() {
         width: 400,
         height: 500,
         resizable: false,
+        icon: `./src/assets/images/icon.${os.platform() === "win32" ? "ico" : "png"}`,
         transparent: os.platform() === 'win32',
-        frame: os.platform() !== 'win32',
+        frame: false,
         show: false,
         webPreferences: {
             contextIsolation: false,
@@ -32,7 +33,6 @@ function createWindow() {
     electron.Menu.setApplicationMenu(null);
     updateWindow.setMenuBarVisibility(false);
     updateWindow.loadFile(path.join(electron.app.getAppPath(), 'src', 'index.html'));
-    updateWindow.webContents.openDevTools()
     updateWindow.once('ready-to-show', () => {
         if (updateWindow) {
             updateWindow.show();
