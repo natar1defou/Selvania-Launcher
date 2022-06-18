@@ -96,7 +96,6 @@ class Home {
             let playBtn = document.querySelector('.play-btn');
             let info = document.querySelector(".text-download")
             let progressBar = document.querySelector(".progress-bar")
-            let logcontent = document.querySelector(".log-content")
 
             if (Resolution.screen.width == '<auto>') {
                 screen = false
@@ -150,7 +149,7 @@ class Home {
             })
 
             launch.on('data', (e) => {
-                new logger('Minecraft', '#36b030', logcontent);
+                new logger('Minecraft', '#36b030');
                 if(launcherSettings.launcher.close === 'close-launcher') ipcRenderer.send("main-window-hide");
                 progressBar.style.display = "none"
                 info.innerHTML = `Demarrage en cours...`
@@ -163,7 +162,7 @@ class Home {
                 info.style.display = "none"
                 playBtn.style.display = "block"
                 info.innerHTML = `Vérification`
-                new logger('Launcher', '#7289da', logcontent);
+                new logger('Launcher', '#7289da');
                 console.log('Close');
             })
         })

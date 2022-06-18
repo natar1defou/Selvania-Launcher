@@ -25,22 +25,12 @@ class Launcher {
     }
 
     initLog() {
-        let logs = document.querySelector(".log-panel");
-        let block = false;
         document.addEventListener("keydown", (e) => {
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 73 || e.keyCode == 123 && !dev) {
-                if (block === true) {
-                    logs.style.display = "none";
-                    block = false;
-                } else {
-                    logs.style.display = "block";
-                    block = true;
-                }
-            } else if (e.keyCode == 122) {
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73 || e.keyCode == 123) {
                 ipcRenderer.send("main-window-dev-tools");
             }
         })
-        new logger('Launcher', '#7289da', document.querySelector(".log-content"))
+        new logger('Launcher', '#7289da')
     }
 
     initFrame() {

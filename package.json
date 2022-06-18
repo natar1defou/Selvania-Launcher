@@ -15,19 +15,17 @@
         "build:win": "npm run build -- -w",
         "build:mac": "npm run build -- -m",
         "build:linux": "npm run build -- -l",
-        "obf": "node src/assets/js/utils/obfuscate.js --obf=true",
         "dev": "nodemon --exec npm start"
     },
     "license": "CC0",
     "nodemonConfig": {
-        "ignore": ["app/*"],
         "ext": "js,html,css"
     },
     "build": {
         "appId": "Selvania-Launcher",
         "productName": "Selvania-Launcher",
-        "artifactName": "${productName}-setup-${version}.${ext}",
-        "files": [],
+        "artifactName": "${productName}-${os}-${arch}.${ext}",
+        "files": ["src/**/*", "package.json", "LICENSE.md"],
         "directories": {
             "output": "dist"
         },
@@ -37,6 +35,9 @@
             "target": [{
                 "target": "nsis",
                 "arch": ["x64"]
+            }, {
+                "target": "zip",
+                "arch": ["x64"]
             }]
         },
         "mac": {
@@ -44,10 +45,10 @@
             "category": "public.app-category.games",
             "target": [{
                 "target": "dmg",
-                "arch": [
-                    "x64",
-                    "arm64"
-                ]
+                "arch": ["x64","arm64"]
+            },{
+                "target": "zip",
+                "arch": ["x64","arm64"]
             }]
         },
         "linux": {
@@ -55,11 +56,19 @@
             "target": [{
                 "target": "AppImage",
                 "arch": ["x64"]
+            }, {
+                "target": "deb",
+                "arch": ["x64"]
+            }, {
+                "target": "rpm",
+                "arch": ["x64"]
+            }, {
+                "target": "zip",
+                "arch": ["x64"]
             }]
         }
     },
     "dependencies": {
-        "asar": "^3.1.0",
         "minecraft-java-core": "^2.0.0",
         "node-fetch": "^2.6.7"
     },
