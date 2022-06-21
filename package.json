@@ -35,6 +35,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/natar1defou/Selvania-Launcher/tree/master"
+        "url": "git+https://github.com/natar1defou/Selvania-Launcher.git"
     }
 }
