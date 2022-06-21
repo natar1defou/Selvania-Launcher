@@ -1,7 +1,7 @@
 {
     "name": "FKZ-RP",
     "preductname": "FKZ-RP",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Launcher Mincraft custom (crack, premium)",
     "main": "src/app.js",
     "author": "Luuxis, Kirua",
@@ -35,6 +35,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/luuxis/Selvania-Launcher.git"
+        "url": "git+https://github.com/natar1defou/Selvania-Launcher/tree/master"
     }
 }
