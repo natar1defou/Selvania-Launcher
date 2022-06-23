@@ -83,6 +83,7 @@ class Login {
                 microsoftBtn.disabled = false;
                 mojangBtn.disabled = false;
                 cancelBtn.disabled = false;
+                cancelBtn.style.display = "none";
             }).catch(err => {
                 console.log(err)
                 microsoftBtn.disabled = false;
@@ -162,6 +163,7 @@ class Login {
                 loginBtn.disabled = false;
                 mailInput.disabled = false;
                 passwordInput.disabled = false;
+                loginBtn.style.display = "none";
             }).catch(err => {
                 cancelMojangBtn.disabled = false;
                 loginBtn.disabled = false;
@@ -180,7 +182,7 @@ class Login {
         let loginBtn = document.querySelector(".login-btn")
         let mojangBtn = document.querySelector('.mojang')
 
-        mojangBtn.innerHTML = "Offline"
+        mojangBtn.innerHTML = "Crack"
 
         mojangBtn.addEventListener("click", () => {
             document.querySelector(".login-card").style.display = "none";
@@ -202,6 +204,15 @@ class Login {
 
             if (mailInput.value == "") {
                 infoLogin.innerHTML = "Entrez votre adresse email / Nom d'utilisateur"
+                cancelMojangBtn.disabled = false;
+                loginBtn.disabled = false;
+                mailInput.disabled = false;
+                passwordInput.disabled = false;
+                return
+            }
+
+            if (mailInput.value.length < 3) {
+                infoLogin.innerHTML = "Votre nom d'utilisateur doit avoir au moins 3 caractères"
                 cancelMojangBtn.disabled = false;
                 loginBtn.disabled = false;
                 mailInput.disabled = false;
@@ -234,6 +245,7 @@ class Login {
                 loginBtn.disabled = false;
                 mailInput.disabled = false;
                 passwordInput.disabled = false;
+                loginBtn.style.display = "none";
             }).catch(err => {
                 console.log(err)
                 cancelMojangBtn.disabled = false;

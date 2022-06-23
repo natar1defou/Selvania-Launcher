@@ -19,12 +19,12 @@
     width: 50px;
     height: 50px;
     border: none;
-    border-radius: 15px;
+    border-radius: 30px;
     transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
 }
 
 .player-head:hover {
-    border-radius: 5px;
+    border-radius: 10px;
     transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
 }
 
@@ -35,12 +35,12 @@
     text-align: center;
     height: 50px;
     border: none;
-    border-radius: 15px;
+    border-radius: 30px;
     transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
 }
 
 .settings-btn:hover {
-    border-radius: 5px;
+    border-radius: 10px;
     transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
 }
 
@@ -139,7 +139,7 @@
     left: 0px;
     width: 100%;
     height: 87px;
-    background-color: #292929;
+    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
     border-radius: 10px 10px 0px 0px;
     transition: color .2s, filter .2s;
 }
@@ -196,7 +196,7 @@
 .bbWrapper {
     position: relative;
     padding: 20px;
-    background-color: #1f1f1f;
+    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
     font-family: Poppins;
     font-size: 13px !important;
     color: #E1E1E1;
@@ -226,8 +226,8 @@
     position: relative;
     width: 100%;
     height: 75px;
-    background-color: #610c74;
-    border-radius: 10px;
+    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
+    border-radius: 30px;
     transition: opacity 1s;
     opacity: .4;
 }
@@ -243,6 +243,7 @@
     height: 45px;
     top: 15px;
     left: 15px;
+    border-radius: 30px;
 }
 
 .name {
