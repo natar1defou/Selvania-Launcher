@@ -52,6 +52,13 @@
     color: #4123b8;
     margin: 15px 0;
     box-shadow: 0 0 5px #610c74;
+    background: linear-gradient(to right, rgb(255 147 7), rgb(253 255 0));
+    transition: 0.25s ease;
+}
+
+.play-btn:hover {
+    width: 170px;
+    height: 40px;
 }
 
 download-content {
@@ -333,6 +340,7 @@ download-content {
     color: #4123b8;
     margin: 15px 0;
     box-shadow: 0 0 5px #610c74;
+    background: linear-gradient(to right, rgb(255 147 7), rgb(253 255 0));
 }
 
 .BV {
@@ -343,80 +351,42 @@ download-content {
     left: 82px;
     transition: color .2s;
 }
-#landingContainer {
-    height: 100%;
+
+.mediaContainer {
     position: relative;
-    transition: background 2s ease;
-    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    height: -485px;
+    top: 388px;
+    left: 586px;
 }
 
-/* Upper content container. */
-#landingContainer > #upper {
-    position: relative;
-    transition: top 2s ease;
-    top: 0px;
-    height: 77%;
-    display: flex;
-}
-#landingContainer > #upper > #left {
-    display: inline-flex;
-    width: 15%;
-    height: 100%;
-    justify-content: flex-end;
-}
-#landingContainer > #upper > #content {
-    display: inline-flex;
-    width: 70%;
-    height: 100%;
-}
-#landingContainer > #upper > #right {
-    display: inline-flex;
-    width: 15%;
-    height: 100%;
+/* Divider bar between the external and internal icons. */
+.mediaDivider {
+    height: 1px;
+    width: 14px;
+    background: rgb(255, 255, 255);
+    margin: 10px 0px;
 }
 
-/* Lower content container. */
-#landingContainer > #lower {
-    height: 23%;
-    display: flex;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-}
-#landingContainer > #lower > #left {
+.mediaSVG {
     position: relative;
-    transition: top 2s ease;
-    top: 0px;
-    height: 100%;
-    width: 33%;
-    display: inline-flex;
-    justify-content: center;
+    fill: #ffffff;
+    height: 12px;
+    transition: 0.25s ease;
+    cursor: pointer;
+    height: 35px;
+    width: 39px;
+    top: -200px;
+    left: 565px;
 }
-#landingContainer > #lower > #left #content {
-    position: relative;
-    top: 25px;
-    display: inline-flex;
-    line-height: 24px;
-    left: 50px;
+.mediaSVG:hover,
+.mediaURL:focus .mediaSVG,
+.mediaSVG:active {
+    height: 45px;
 }
-#landingContainer > #lower > #center {
-    position: relative;
-    transition: top 2s ease;
-    top: 0px;
-    height: 100%;
-    width: 34%;
-    display: inline-flex;
-    justify-content: center;
-}
-#landingContainer > #lower > #center #content {
-    position: relative;
-    z-index: 500;
-    transition: top 2s ease;
-    top: 10px;
-}
-#landingContainer > #lower > #right {
-    position: relative;
-    transition: top 2s ease;
-    top: 0px;
-    height: 100%;
-    width: 33%;
-    display: inline-flex;
+
+/* Social media URL shared styles. */
+.mediaURL {
+    outline: none;
 }
