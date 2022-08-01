@@ -1,44 +1,46 @@
 .tabs-settings-btn {
-    width: 130px;
-    background-color: #0000001a;
-    border-right: 3px solid rgba(255, 255, 255, .1);
+    width: 127;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 255px;
+    height: 243px;
     bottom: 0;
     z-index: 10;
+    flex-direction: column;
 }
 
 .tab-btn-css {
-    border-radius: 11px;
+    border-radius: 75px;
     width: 116px;
     height: 39px;
     margin: auto 12px;
-    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
+    background: linear-gradient(to right, rgb(210 204 23), rgb(255 153 0));
     font: normal normal bold 15px/20px Poppins;
     cursor: pointer;
     outline: none;
     position: relative;
     top: 10px;
-    left: -3px;
+    left: -8px;
+    transition: 0.25s ease;
 }
 
 .tab-btn-css:hover {
-    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
-    box-shadow: 0 0 5px #610c74;
+    background: linear-gradient(to right, rgb(210 204 23), rgb(255 153 0));
+    width: 120px;
+    height: 43px;
 }
 
 .active-tab-btn {
-    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
-    box-shadow: 0 0 5px #610c74;
+    background: linear-gradient(to right, rgb(210 204 23), rgb(255 153 0));
+    transition: 0.25s ease;
 }
 
 .active-tab-btn:hover {
-    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
-    box-shadow: 0 0 5px #610c74;
+    background: linear-gradient(to right, rgb(210 204 23), rgb(255 153 0));
+    width: 120px;
+    height: 43px;
 }
 
 .tabs-settings-content {

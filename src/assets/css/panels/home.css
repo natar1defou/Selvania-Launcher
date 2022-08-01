@@ -52,7 +52,7 @@
     color: #4123b8;
     margin: 15px 0;
     box-shadow: 0 0 5px #610c74;
-    background: linear-gradient(to right, rgb(255 147 7), rgb(253 255 0));
+    background: linear-gradient(to right, rgb(39 126 159), rgb(81 61 136));
     transition: 0.25s ease;
 }
 
@@ -119,7 +119,7 @@ download-content {
     left: 0px;
     width: 100%;
     height: 87px;
-    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
+    background: linear-gradient(to right, rgb(39 126 159), rgb(81 61 136));
     border-radius: 10px 10px 0px 0px;
     transition: color .2s, filter .2s;
 }
@@ -176,7 +176,7 @@ download-content {
 .bbWrapper {
     position: relative;
     padding: 20px;
-    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
+    background: linear-gradient(to right, rgb(39 126 159), rgb(81 61 136));
     font-family: Poppins;
     font-size: 13px !important;
     color: #E1E1E1;
@@ -208,7 +208,7 @@ download-content {
     top: 25px;
     left: 357px;
     height: 75px;
-    background: linear-gradient(to right, rgb(82, 4, 82), rgb(255, 150, 167));
+    background: linear-gradient(to right, rgb(39 126 159), rgb(81 61 136));
     border-radius: 30px;
 }
 
@@ -340,25 +340,44 @@ download-content {
     color: #4123b8;
     margin: 15px 0;
     box-shadow: 0 0 5px #610c74;
-    background: linear-gradient(to right, rgb(255 147 7), rgb(253 255 0));
+    background: linear-gradient(to right, rgb(39 126 159), rgb(81 61 136));
+    transition: 0.25s ease;
+}
+
+.newsButtonText:hover {
+    width: 170px;
+    height: 40px;
 }
 
 .BV {
     position: relative;
-    font: normal normal bold 51px/25px Poppins;
+    font: normal normal bold 52px/52px Poppins;
     color: #E1E1E1;
     top: 104px;
-    left: 82px;
+    left: -82;
     transition: color .2s;
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+    margin-left: 181px;
+    height: 48px;
 }
 
 .mediaContainer {
     position: relative;
-    display: flex;
-    justify-content: center;
     height: -485px;
-    top: 388px;
-    left: 586px;
+    top: 650px;
+    left: 787px;
+    width: 160px;
+    height: 37px;
+    border-radius: 10px;
+    border: none;
+    color: #4123b8;
+    font: normal normal bold 20px/25px Poppins;
+    color: #4123b8;
+    margin: 15px 0;
+    box-shadow: 0 0 5px #610c74;
+    background: linear-gradient(to right, rgb(39 126 159), rgb(81 61 136));
+    transition: 0.25s ease;
 }
 
 /* Divider bar between the external and internal icons. */
@@ -377,16 +396,31 @@ download-content {
     cursor: pointer;
     height: 35px;
     width: 39px;
-    top: -200px;
-    left: 565px;
+    top: 0px;
+    left: 67px;
 }
 .mediaSVG:hover,
 .mediaURL:focus .mediaSVG,
 .mediaSVG:active {
-    height: 45px;
+    height: 35px;
+    width: 39px;
+    top: 0px;
+    left: 13px;
 }
 
 /* Social media URL shared styles. */
 .mediaURL {
     outline: none;
+}
+
+.info {
+    position: relative;
+    height: -485px;
+    top: 113px;
+    left: 101px;
+    width: 569px;
+    height: 37px;
+    border: none;
+    font: normal normal bold 20px/25px Poppins;
+    color: #e1e1e1;
 }
