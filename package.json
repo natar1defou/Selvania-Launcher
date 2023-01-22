@@ -1,11 +1,11 @@
 {
     "name": "FKZ-RP",
     "preductname": "FKZ-RP",
-    "version": "1.1.13",
+    "version": "1.1.14",
     "description": "Launcher Mincraft custom (crack, premium)",
     "main": "src/app.js",
     "author": "Luuxis, Kirua",
-    "url": "http://launcher.fkz-rp.fr",
+    "url": "https://httpd.crevoisier.freeddns.org/",
     "engines": {
         "node": "16.x.x"
     },
