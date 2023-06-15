@@ -62,14 +62,15 @@ class Login {
                     user_properties: account_connect.user_properties,
                     meta: {
                         type: account_connect.meta.type,
+                        xuid: account_connect.meta.xuid,
                         demo: account_connect.meta.demo
                     }
                 }
 
                 let profile = {
                     uuid: account_connect.uuid,
-                    skins: account_connect.profile.skins,
-                    cape: account_connect.profile.cape
+                    skins: account_connect.profile.skins || [],
+                    capes: account_connect.profile.capes || []
                 }
 
                 this.database.add(account, 'accounts')
@@ -94,7 +95,7 @@ class Login {
         })
     }
 
-    loginMojang() {
+    async loginMojang() {
         let mailInput = document.querySelector('.Mail')
         let passwordInput = document.querySelector('.Password')
         let cancelMojangBtn = document.querySelector('.cancel-mojang')
@@ -112,7 +113,7 @@ class Login {
             document.querySelector(".login-card-mojang").style.display = "none";
         })
 
-        loginBtn.addEventListener("click", () => {
+        loginBtn.addEventListener("click", async () => {
             cancelMojangBtn.disabled = true;
             loginBtn.disabled = true;
             mailInput.disabled = true;
@@ -138,43 +139,48 @@ class Login {
                 return
             }
 
-            Mojang.getAuth(mailInput.value, passwordInput.value).then(account_connect => {
-                let account = {
-                    access_token: account_connect.access_token,
-                    client_token: account_connect.client_token,
-                    uuid: account_connect.uuid,
-                    name: account_connect.name,
-                    user_properties: account_connect.user_properties,
-                    meta: {
-                        type: account_connect.meta.type,
-                        offline: account_connect.meta.offline
-                    }
-                }
+            let account_connect = await Mojang.login(mailInput.value, passwordInput.value)
 
-                this.database.add(account, 'accounts')
-                this.database.update({ uuid: "1234", selected: account.uuid }, 'accounts-selected');
-
-                addAccount(account)
-                accountSelect(account.uuid)
-                changePanel("home");
-
-                cancelMojangBtn.disabled = false;
-                cancelMojangBtn.click();
-                loginBtn.disabled = false;
-                mailInput.disabled = false;
-                passwordInput.disabled = false;
-                loginBtn.style.display = "none";
-            }).catch(err => {
+            if (account_connect == null || account_connect.error) {
                 cancelMojangBtn.disabled = false;
                 loginBtn.disabled = false;
                 mailInput.disabled = false;
                 passwordInput.disabled = false;
                 infoLogin.innerHTML = 'Adresse E-mail ou mot de passe invalide'
-            })
+                return
+            }
+
+            let account = {
+                access_token: account_connect.access_token,
+                client_token: account_connect.client_token,
+                uuid: account_connect.uuid,
+                name: account_connect.name,
+                user_properties: account_connect.user_properties,
+                meta: {
+                    type: account_connect.meta.type,
+                    offline: account_connect.meta.offline
+                }
+            }
+
+            this.database.add(account, 'accounts')
+            this.database.update({ uuid: "1234", selected: account.uuid }, 'accounts-selected');
+
+            addAccount(account)
+            accountSelect(account.uuid)
+            changePanel("home");
+
+            cancelMojangBtn.disabled = false;
+            cancelMojangBtn.click();
+            mailInput.value = "";
+            loginBtn.disabled = false;
+            mailInput.disabled = false;
+            passwordInput.disabled = false;
+            loginBtn.style.display = "block";
+            infoLogin.innerHTML = "&nbsp;";
         })
     }
 
-    loginOffline() {
+    async loginOffline() {
         let mailInput = document.querySelector('.Mail')
         let passwordInput = document.querySelector('.Password')
         let cancelMojangBtn = document.querySelector('.cancel-mojang')
@@ -194,7 +200,7 @@ class Login {
             document.querySelector(".login-card-mojang").style.display = "none";
         })
 
-        loginBtn.addEventListener("click", () => {
+        loginBtn.addEventListener("click", async () => {
             cancelMojangBtn.disabled = true;
             loginBtn.disabled = true;
             mailInput.disabled = true;
@@ -220,42 +226,45 @@ class Login {
                 return
             }
 
-            Mojang.getAuth(mailInput.value, passwordInput.value).then(async account_connect => {
-                let account = {
-                    access_token: account_connect.access_token,
-                    client_token: account_connect.client_token,
-                    uuid: account_connect.uuid,
-                    name: account_connect.name,
-                    user_properties: account_connect.user_properties,
-                    meta: {
-                        type: account_connect.meta.type,
-                        offline: account_connect.meta.offline
-                    }
-                }
+            let account_connect = await Mojang.login(mailInput.value, passwordInput.value)
 
-                this.database.add(account, 'accounts')
-                this.database.update({ uuid: "1234", selected: account.uuid }, 'accounts-selected');
-
-                addAccount(account)
-                accountSelect(account.uuid)
-                changePanel("home");
-
-                cancelMojangBtn.disabled = false;
-                cancelMojangBtn.click();
-                loginBtn.disabled = false;
-                mailInput.disabled = false;
-                passwordInput.disabled = false;
-                loginBtn.style.display = "none";
-            }).catch(err => {
-                console.log(err)
+            if (account_connect == null || account_connect.error) {
                 cancelMojangBtn.disabled = false;
                 loginBtn.disabled = false;
                 mailInput.disabled = false;
                 passwordInput.disabled = false;
                 infoLogin.innerHTML = 'Adresse E-mail ou mot de passe invalide'
-            })
+                return
+            }
+
+            let account = {
+                access_token: account_connect.access_token,
+                client_token: account_connect.client_token,
+                uuid: account_connect.uuid,
+                name: account_connect.name,
+                user_properties: account_connect.user_properties,
+                meta: {
+                    type: account_connect.meta.type,
+                    offline: account_connect.meta.offline
+                }
+            }
+
+            this.database.add(account, 'accounts')
+            this.database.update({ uuid: "1234", selected: account.uuid }, 'accounts-selected');
+
+            addAccount(account)
+            accountSelect(account.uuid)
+            changePanel("home");
+
+            cancelMojangBtn.disabled = false;
+            cancelMojangBtn.click();
+            mailInput.value = "";
+            loginBtn.disabled = false;
+            mailInput.disabled = false;
+            passwordInput.disabled = false;
+            loginBtn.style.display = "block";
+            infoLogin.innerHTML = "&nbsp;";
         })
     }
 }
-
 export default Login;
